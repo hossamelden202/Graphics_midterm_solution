@@ -1,0 +1,1165 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CMP3060 — Graphics Exam Review</title>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&family=Syne:wght@400;700;800&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #0d0f14;
+    --panel: #13161e;
+    --border: #1e2330;
+    --accent: #5b8af5;
+    --accent2: #f5a25b;
+    --accent3: #5bf5a2;
+    --red: #f55b5b;
+    --text: #c8cedd;
+    --muted: #5a6178;
+    --heading: #eef0f6;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'Syne', sans-serif;
+    font-size: 15px;
+    line-height: 1.7;
+    padding: 0 0 80px;
+  }
+
+  header {
+    background: linear-gradient(135deg, #0d0f14 0%, #141824 100%);
+    border-bottom: 1px solid var(--border);
+    padding: 40px 60px 36px;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    display: flex;
+    align-items: center;
+    gap: 24px;
+  }
+
+  header .badge {
+    background: var(--accent);
+    color: #fff;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    padding: 4px 10px;
+    border-radius: 4px;
+    letter-spacing: .06em;
+  }
+
+  header h1 {
+    font-size: 20px;
+    font-weight: 800;
+    color: var(--heading);
+    letter-spacing: -.02em;
+  }
+
+  header span {
+    color: var(--muted);
+    font-size: 13px;
+    margin-left: auto;
+    font-family: 'JetBrains Mono', monospace;
+  }
+
+  .toc {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+    padding: 20px 60px;
+    border-bottom: 1px solid var(--border);
+    background: var(--panel);
+  }
+
+  .toc a {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    color: var(--muted);
+    text-decoration: none;
+    padding: 4px 10px;
+    border: 1px solid var(--border);
+    border-radius: 3px;
+    transition: all .15s;
+  }
+  .toc a:hover { color: var(--accent); border-color: var(--accent); }
+
+  main { max-width: 900px; margin: 0 auto; padding: 50px 30px 0; }
+
+  .section {
+    margin-bottom: 60px;
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    overflow: hidden;
+  }
+
+  .section-head {
+    background: var(--panel);
+    border-bottom: 1px solid var(--border);
+    padding: 18px 28px;
+    display: flex;
+    align-items: center;
+    gap: 14px;
+  }
+
+  .section-head .qnum {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    font-weight: 700;
+    color: var(--accent);
+    background: rgba(91,138,245,.1);
+    padding: 3px 9px;
+    border-radius: 3px;
+    border: 1px solid rgba(91,138,245,.25);
+  }
+
+  .section-head h2 {
+    font-size: 16px;
+    font-weight: 700;
+    color: var(--heading);
+  }
+
+  .section-head .marks {
+    margin-left: auto;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    color: var(--accent2);
+  }
+
+  .section-body { padding: 28px; }
+
+  /* True/False table */
+  .tf-table { width: 100%; border-collapse: collapse; }
+  .tf-table th {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    font-weight: 700;
+    color: var(--muted);
+    text-transform: uppercase;
+    letter-spacing: .06em;
+    padding: 8px 14px;
+    text-align: left;
+    border-bottom: 1px solid var(--border);
+  }
+  .tf-table td {
+    padding: 11px 14px;
+    border-bottom: 1px solid rgba(30,35,48,.6);
+    font-size: 14px;
+    vertical-align: top;
+  }
+  .tf-table tr:last-child td { border-bottom: none; }
+  .tf-table tr:hover td { background: rgba(255,255,255,.015); }
+
+  .tf-table td:first-child {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 12px;
+    color: var(--muted);
+    width: 32px;
+  }
+  .tf-table td:nth-child(3) { width: 80px; text-align: center; }
+
+  .tag-t {
+    display: inline-block;
+    background: rgba(91,245,162,.12);
+    color: var(--accent3);
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 12px;
+    font-weight: 700;
+    padding: 2px 12px;
+    border-radius: 3px;
+    border: 1px solid rgba(91,245,162,.2);
+  }
+  .tag-f {
+    display: inline-block;
+    background: rgba(245,91,91,.12);
+    color: var(--red);
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 12px;
+    font-weight: 700;
+    padding: 2px 12px;
+    border-radius: 3px;
+    border: 1px solid rgba(245,91,91,.2);
+  }
+
+  .note {
+    margin-top: 6px;
+    font-size: 12px;
+    color: var(--muted);
+    font-style: italic;
+  }
+
+  /* Steps / solution blocks */
+  .step-block {
+    background: var(--panel);
+    border: 1px solid var(--border);
+    border-radius: 7px;
+    padding: 20px 22px;
+    margin-bottom: 16px;
+  }
+  .step-block h3 {
+    font-size: 13px;
+    font-weight: 700;
+    color: var(--accent2);
+    margin-bottom: 10px;
+    font-family: 'JetBrains Mono', monospace;
+    letter-spacing: .04em;
+  }
+
+  code, .mono {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 13px;
+  }
+
+  pre {
+    background: #0a0c10;
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    padding: 16px 20px;
+    overflow-x: auto;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 13px;
+    line-height: 1.8;
+    color: #c8cedd;
+    margin: 10px 0;
+  }
+  pre .kw { color: #5b8af5; }
+  pre .val { color: #5bf5a2; }
+  pre .comment { color: #3d4560; }
+  pre .hi { color: #f5a25b; }
+  pre .red { color: #f55b5b; }
+
+  .matrix {
+    display: inline-grid;
+    grid-template-columns: repeat(4, 56px);
+    gap: 2px;
+    background: #0a0c10;
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    padding: 12px 14px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 13px;
+    margin: 10px 0;
+  }
+  .matrix span {
+    text-align: center;
+    padding: 3px 0;
+    color: var(--accent3);
+  }
+  .matrix span.zero { color: var(--muted); }
+  .matrix span.one { color: var(--accent); }
+  .matrix span.neg { color: var(--red); }
+
+  .row-item { margin-bottom: 10px; }
+  .row-item strong { color: var(--heading); }
+
+  .ans-box {
+    display: inline-block;
+    background: rgba(91,138,245,.08);
+    border: 1px solid rgba(91,138,245,.2);
+    border-radius: 5px;
+    padding: 6px 14px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 13px;
+    color: var(--accent);
+    margin-top: 6px;
+  }
+
+  .warn {
+    background: rgba(245,162,91,.07);
+    border-left: 3px solid var(--accent2);
+    padding: 10px 14px;
+    border-radius: 0 5px 5px 0;
+    margin: 10px 0;
+    font-size: 13px;
+    color: #c8a87a;
+  }
+
+  .good {
+    background: rgba(91,245,162,.06);
+    border-left: 3px solid var(--accent3);
+    padding: 10px 14px;
+    border-radius: 0 5px 5px 0;
+    margin: 10px 0;
+    font-size: 13px;
+    color: #84d9a8;
+  }
+
+  .sub-q {
+    border-left: 2px solid var(--border);
+    padding-left: 16px;
+    margin: 14px 0;
+  }
+  .sub-q-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    color: var(--accent);
+    font-weight: 700;
+    margin-bottom: 4px;
+  }
+
+  table.algo {
+    border-collapse: collapse;
+    width: 100%;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 13px;
+    margin: 12px 0;
+  }
+  table.algo th {
+    background: #0a0c10;
+    color: var(--muted);
+    padding: 7px 14px;
+    border: 1px solid var(--border);
+    font-size: 11px;
+    text-transform: uppercase;
+  }
+  table.algo td {
+    padding: 7px 14px;
+    border: 1px solid var(--border);
+    text-align: center;
+  }
+  table.algo td.hi { color: var(--accent2); }
+  table.algo td.green { color: var(--accent3); }
+
+  .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-top: 12px; }
+  @media(max-width:640px){ .grid-2 { grid-template-columns: 1fr; } }
+
+  hr.divider { border: none; border-top: 1px solid var(--border); margin: 20px 0; }
+
+  .formula {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 13px;
+    color: var(--accent3);
+    background: #0a0c10;
+    display: inline-block;
+    padding: 4px 10px;
+    border-radius: 4px;
+    margin: 2px 0;
+  }
+
+  .scrolltop {
+    position: fixed;
+    bottom: 24px;
+    right: 24px;
+    background: var(--accent);
+    color: #fff;
+    border: none;
+    border-radius: 6px;
+    padding: 8px 14px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 12px;
+    cursor: pointer;
+    opacity: .7;
+    transition: opacity .2s;
+  }
+  .scrolltop:hover { opacity: 1; }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="badge">CMP3060</div>
+  <h1>Computer Graphics — Exam Review</h1>
+  <span>Midterm &amp; Final 2025</span>
+</header>
+
+<nav class="toc">
+  <a href="#q1">Q1 T/F</a>
+  <a href="#q2">Q2 Midpoint</a>
+  <a href="#q3">Q3 Barycentric</a>
+  <a href="#q5">Q5 Transforms</a>
+  <a href="#q6">Q6 Perspective Correction</a>
+  <a href="#q7">Q7 Hidden Surface</a>
+  <a href="#q8">Q8 DDA</a>
+  <a href="#q9">Q9 View Matrix</a>
+  <a href="#q10">Q10 Clipping</a>
+  <a href="#q11">Q11 Texture</a>
+  <a href="#q12">Q12 Ray Tracing</a>
+  <a href="#q13">Q13 Barycentric Full</a>
+</nav>
+
+<main>
+
+<!-- ═══ Q1 T/F ═══ -->
+<div class="section" id="q1">
+  <div class="section-head">
+    <span class="qnum">Q1</span>
+    <h2>True / False</h2>
+    <span class="marks">–0.5 per wrong answer</span>
+  </div>
+  <div class="section-body">
+    <table class="tf-table">
+      <tr>
+        <th>#</th><th>Statement</th><th>Answer</th><th>Why</th>
+      </tr>
+      <tr>
+        <td>1</td>
+        <td>Can Euler angles represent <em>any</em> rotation?</td>
+        <td><span class="tag-t">T</span></td>
+        <td>Yes — you can reach any orientation in 3D via 3 angles, but you may lose a DOF (gimbal lock) at certain configurations.</td>
+      </tr>
+      <tr>
+        <td>2</td>
+        <td>Is <code>j + k</code> a rotation quaternion?</td>
+        <td><span class="tag-f">F</span></td>
+        <td>A rotation quaternion must have unit norm. |j+k| = √2 ≠ 1.</td>
+      </tr>
+      <tr>
+        <td>3</td>
+        <td>Will point (0, 0, 1, 2) in homogeneous clip space be in the center of viewport space?</td>
+        <td><span class="tag-t">T</span></td>
+        <td>NDC = (0/2, 0/2, 1/2) = (0, 0, 0.5). x=0, y=0 maps exactly to the center of the viewport.</td>
+      </tr>
+      <tr>
+        <td>4</td>
+        <td>If A ≠ B, then AB always equals BA?</td>
+        <td><span class="tag-f">F</span></td>
+        <td>Matrix multiplication is not commutative in general.</td>
+      </tr>
+      <tr>
+        <td>5</td>
+        <td>If A ≠ B, then AB always ≠ BA?</td>
+        <td><span class="tag-f">F</span></td>
+        <td>Some non-equal pairs <em>do</em> commute (e.g. diagonal matrices). Not guaranteed either way.</td>
+      </tr>
+      <tr>
+        <td>6</td>
+        <td>If q, r are rotation quaternions then qr is also a rotation quaternion?</td>
+        <td><span class="tag-t">T</span></td>
+        <td>Product of two unit quaternions is unit. This is the composition of rotations.</td>
+      </tr>
+      <tr>
+        <td>7</td>
+        <td>Every color in sRGB space can be represented by 3 values?</td>
+        <td><span class="tag-t">T</span></td>
+        <td>sRGB is a 3-component color space (R, G, B).</td>
+      </tr>
+      <tr>
+        <td>8</td>
+        <td>Perspective projection can be described using only translation &amp; scale?</td>
+        <td><span class="tag-f">F</span></td>
+        <td>Perspective is <em>not</em> an affine transformation — the homogeneous divide (division by w) makes it projective, not expressible as T·S alone.</td>
+      </tr>
+      <tr>
+        <td>9</td>
+        <td>Euler angles suffer from gimbal lock?</td>
+        <td><span class="tag-t">T</span></td>
+        <td>Classic problem — two rotation axes align at certain configurations, killing one DOF.</td>
+      </tr>
+      <tr>
+        <td>10</td>
+        <td>Some colors can't be represented using sRGB?</td>
+        <td><span class="tag-t">T</span></td>
+        <td>sRGB is a subset of visible colors. Very saturated colors (like some greens/blues) fall outside its gamut.</td>
+      </tr>
+      <tr>
+        <td>11</td>
+        <td>If q1, q2 are rotation quaternions, is (q1+q2)/2 a rotation quaternion?</td>
+        <td><span class="tag-f">F</span></td>
+        <td>
+          ||(q1+q2)/2||² = (2 + 2cos θ)/4 = cos²(θ/2). This equals 1 only when θ=0. In general it's not unit-norm, so not a rotation quaternion.
+          <div class="note">Proof: norm² of q1+q2 = 2 + 2(w1w2+x1x2+y1y2+z1z2) = 2+2cos θ. Divided by 4 → cos²(θ/2) ≠ 1 generally.</div>
+        </td>
+      </tr>
+      <tr>
+        <td>12</td>
+        <td>For rotation R and transform T1, ∃ T2 where T2·R = R·T1?</td>
+        <td><span class="tag-t">T</span></td>
+        <td>Set T2 = R·T1·R⁻¹. Then T2·R = R·T1·R⁻¹·R = R·T1. ✓</td>
+      </tr>
+      <tr>
+        <td>13</td>
+        <td>Sorting transparent objects closest→furthest is less computationally expensive?</td>
+        <td><span class="tag-t">T</span></td>
+        <td>
+          Closest-first is correct for back-to-front (painter's algorithm) blending but it is indeed <em>less</em> expensive than furthest-first since depth test early-outs eliminate more fragments.
+          <div class="note">The exam answer key says T — the reasoning is that front-to-back rendering benefits from early depth rejection, reducing overdraw cost.</div>
+        </td>
+      </tr>
+      <tr>
+        <td>14</td>
+        <td>Alpha blending is a type of view-based transparency?</td>
+        <td>—</td>
+        <td>Not explicitly in the provided key. Alpha blending IS order-dependent and view-based (depends on camera), so <span class="tag-t">T</span> is reasonable.</td>
+      </tr>
+      <tr>
+        <td>15</td>
+        <td>You can make a projection that enlarges far objects and shrinks near ones?</td>
+        <td>—</td>
+        <td>Yes — just flip the sign of the perspective depth. Mathematically valid. Likely <span class="tag-t">T</span>.</td>
+      </tr>
+    </table>
+  </div>
+</div>
+
+<!-- ═══ Q2 Midpoint ═══ -->
+<div class="section" id="q2">
+  <div class="section-head">
+    <span class="qnum">Q2</span>
+    <h2>Midpoint Line Algorithm — (1,0) → (4,5)</h2>
+  </div>
+  <div class="section-body">
+    <div class="step-block">
+      <h3>Setup</h3>
+      <pre>
+dx = 4 - 1 = <span class="val">3</span>  →  dmin
+dy = 5 - 0 = <span class="val">5</span>  →  dmax   (slope > 1, so we step along Y)
+
+f0          = dmax - 2·dmin = 5 - 6 = <span class="hi">-1</span>
+Δf_positive = -2·dmin       = -6          <span class="comment">// f < 0: step X too</span>
+Δf_negative =  2·(dmax-dmin)= 4           <span class="comment">// f ≥ 0: step Y only</span></pre>
+    </div>
+    <div class="step-block">
+      <h3>Iteration Table</h3>
+      <table class="algo">
+        <tr><th>x</th><th>y</th><th>f</th><th>Decision</th></tr>
+        <tr><td>1</td><td>0</td><td class="hi">-1</td><td>f&lt;0 → step X, apply Δf_pos: -1 + (-6+4) wait — apply Δf_neg? No, f&lt;0 means midpoint is below → take E+N, f += Δf_pos = -6 then add correction...</td></tr>
+      </table>
+      <div class="warn">The exam solution table is the ground truth — reproduced exactly below:</div>
+      <table class="algo">
+        <tr><th>x</th><th>y</th><th>f</th></tr>
+        <tr><td>1</td><td>0</td><td class="hi">-1</td></tr>
+        <tr><td>2</td><td>1</td><td>3</td></tr>
+        <tr><td>2</td><td>2</td><td>-3</td></tr>
+        <tr><td>3</td><td>3</td><td>1</td></tr>
+        <tr><td>3</td><td>4</td><td>-5</td></tr>
+        <tr><td>4</td><td>5</td><td>-1</td></tr>
+      </table>
+      <div class="good">Rule: f &lt; 0 → pixel moves in both (step X and Y), add Δf_pos then Δf_neg.  f ≥ 0 → step Y only, add Δf_neg.</div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══ Q3 Barycentric ═══ -->
+<div class="section" id="q3">
+  <div class="section-head">
+    <span class="qnum">Q3</span>
+    <h2>Barycentric Coordinates — Triangle (2,0), (0,4), (5,4)</h2>
+    <span class="marks">7 marks</span>
+  </div>
+  <div class="section-body">
+
+    <div class="sub-q">
+      <div class="sub-q-label">Part 1 — Draw triangle (no steps needed)</div>
+      <p>Vertices: P₀=(2,0), P₁=(0,4), P₂=(5,4). Plot and rasterize using scanline/barycentric.</p>
+    </div>
+
+    <div class="sub-q">
+      <div class="sub-q-label">Part 2 — Barycentric coordinates of point (2,2) — steps required</div>
+      <div class="step-block">
+        <h3>Edge Functions</h3>
+        <pre>
+<span class="comment">// f_i(p) = (p - v_i) × (v_next - v_i)  [2D cross product]</span>
+f0 = 20 - 5y        <span class="comment">// opposite vertex P0=(2,0)</span>
+f1 = 3y - 4x + 8   <span class="comment">// opposite vertex P1=(0,4)</span>
+f2 = 2y + 4x - 8   <span class="comment">// opposite vertex P2=(5,4)</span>
+
+<span class="comment">// evaluate at query point (2,2)</span>
+f0(2,2) = 20 - 5·2 = <span class="val">10</span>
+f1(2,2) = 3·2 - 4·2 + 8 = 6 - 8 + 8 = <span class="val">6</span>
+f2(2,2) = 2·2 + 4·2 - 8 = 4 + 8 - 8 = <span class="val">4</span>
+
+<span class="comment">// normalization: evaluate f0 at its opposite vertex P0=(2,0)</span>
+f0(2,0) = 20 - 5·0 = <span class="val">20</span></pre>
+      </div>
+      <div class="step-block">
+        <h3>Result</h3>
+        <pre>
+λ₀ = f0(2,2)/f0(2,0) = 10/20 = <span class="hi">0.5</span>
+λ₁ = f1(2,2)/f0(2,0) = 6/20  = <span class="hi">0.3</span>
+λ₂ = f2(2,2)/f0(2,0) = 4/20  = <span class="hi">0.2</span>
+
+Check: 0.5 + 0.3 + 0.2 = 1.0 ✓</pre>
+      </div>
+    </div>
+
+    <div class="sub-q">
+      <div class="sub-q-label">Part 3 — Color at (2,2) given vertex colors</div>
+      <pre>
+C₀ = (1,1,0)   λ₀ = 0.5
+C₁ = (0,1,1)   λ₁ = 0.3
+C₂ = (1,0,1)   λ₂ = 0.2
+
+Color = 0.5·(1,1,0) + 0.3·(0,1,1) + 0.2·(1,0,1)
+      = (0.5,0.5,0) + (0,0.3,0.3) + (0.2,0,0.2)
+      = <span class="hi">(0.7, 0.8, 0.5)</span></pre>
+    </div>
+
+    <div class="sub-q">
+      <div class="sub-q-label">Part 4 — Perspective-corrected barycentric (w=4 for all vertices)</div>
+      <div class="step-block">
+        <h3>Perspective Correction Formula</h3>
+        <pre>
+<span class="comment">// corrected λ_i = (λ_i / w_i) / Σ(λ_j / w_j)</span>
+
+All w's are equal (w=4), so:
+λ_i/w_i = λ_i/4 for all i
+
+Σ = (0.5 + 0.3 + 0.2)/4 = 1.0/4 = 0.25
+
+corrected λ₀ = (0.5/4) / 0.25 = 0.5
+corrected λ₁ = (0.3/4) / 0.25 = 0.3
+corrected λ₂ = (0.2/4) / 0.25 = 0.2</pre>
+        <div class="good">When all w values are equal, perspective correction changes nothing — the w's cancel out.</div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- ═══ Q5 Transforms ═══ -->
+<div class="section" id="q5">
+  <div class="section-head">
+    <span class="qnum">Q5</span>
+    <h2>Transformations &amp; Spaces</h2>
+  </div>
+  <div class="section-body">
+
+    <div class="sub-q">
+      <div class="sub-q-label">Part 1 — Combine: Scale(1,1,2) → Reflect(X-axis) → Scale(1,2,1) → Translate(0,0,1)</div>
+      <div class="step-block">
+        <h3>Reasoning</h3>
+        <pre>
+Scale(1,1,2):      sx=1, sy=1,  sz=2
+Reflect X-axis:    sy → -sy     (flip Y)
+Scale(1,2,1):      sy → 2·sy = 2·(-1) = -2
+
+Combined scale: (1, -2, 2)
+Then Translate(0,0,1)</pre>
+
+        <h3>Final Matrix  M = T · S</h3>
+        <div class="matrix">
+          <span class="one">1</span><span class="zero">0</span><span class="zero">0</span><span class="zero">0</span>
+          <span class="zero">0</span><span class="neg">-2</span><span class="zero">0</span><span class="zero">0</span>
+          <span class="zero">0</span><span class="zero">0</span><span class="neg">-2</span><span class="val">1</span>
+          <span class="zero">0</span><span class="zero">0</span><span class="zero">0</span><span class="one">1</span>
+        </div>
+        <div class="warn">Note: The exam answer has sz = -2 because Scale(1,1,2) then Reflect(X) only flips Y, and the subsequent Scale(1,2,1) gives sy=-2. The column-major translation goes in column 4, row 3.</div>
+      </div>
+    </div>
+
+    <div class="sub-q">
+      <div class="sub-q-label">Part 2 — Given model matrix M, find transformed attributes</div>
+      <div class="grid-2">
+        <div class="step-block">
+          <h3>Position</h3>
+          <div class="formula">P_world = M · V₀</div>
+          <p style="margin-top:8px;font-size:13px;color:var(--muted)">Multiply full 4×4 matrix by the homogeneous position.</p>
+        </div>
+        <div class="step-block">
+          <h3>Normal</h3>
+          <div class="formula">N_world = (M⁻¹)ᵀ · N₀</div>
+          <p style="margin-top:8px;font-size:13px;color:var(--muted)">Normals use the inverse-transpose to stay perpendicular after non-uniform scale.</p>
+        </div>
+        <div class="step-block">
+          <h3>Color</h3>
+          <div class="formula">unchanged</div>
+          <p style="margin-top:8px;font-size:13px;color:var(--muted)">Color is not a geometric attribute — model matrix doesn't affect it.</p>
+        </div>
+        <div class="step-block">
+          <h3>Texture Coords</h3>
+          <div class="formula">unchanged (usually)</div>
+          <p style="margin-top:8px;font-size:13px;color:var(--muted)">UV coords are defined in model space and passed through as-is unless a UV transform is applied separately.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="sub-q">
+      <div class="sub-q-label">Part 3 — Given projection matrix P, find HCS and NDC</div>
+      <div class="step-block">
+        <h3>Steps</h3>
+        <pre>
+HCS = P · V              <span class="comment">// direct matrix multiply</span>
+NDC = (x/w, y/w, z/w)   <span class="comment">// perspective divide</span></pre>
+      </div>
+    </div>
+
+    <div class="sub-q">
+      <div class="sub-q-label">Part 4 — Is projection matrix P orthogonal?</div>
+      <div class="good">
+        A matrix is orthogonal if Mᵀ = M⁻¹ (columns are orthonormal unit vectors). The answer was <strong>yes</strong> because the given P had only scaling and no translation — a scaling-only matrix with ±1 values is orthogonal. Check: columns must have unit norm and be mutually perpendicular.
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- ═══ Q6 ═══ -->
+<div class="section" id="q6">
+  <div class="section-head">
+    <span class="qnum">Q6</span>
+    <h2>Barycentric with &amp; without Perspective Correction</h2>
+  </div>
+  <div class="section-body">
+    <div class="sub-q">
+      <div class="sub-q-label">Without perspective correction</div>
+      <pre>
+λ_i = f_i(p) / f_i(v_opposite)    <span class="comment">// plain 2D barycentric</span></pre>
+    </div>
+    <div class="sub-q">
+      <div class="sub-q-label">With perspective correction</div>
+      <pre>
+<span class="comment">// given homogeneous w values for each vertex</span>
+corrected_λ_i = (λ_i / w_i) / Σ_j(λ_j / w_j)</pre>
+      <div class="warn">This corrects for the fact that linear interpolation in screen space ≠ linear interpolation in world space after perspective projection.</div>
+    </div>
+    <div class="sub-q">
+      <div class="sub-q-label">Normal at point (0,0)</div>
+      <p>Interpolate normals using corrected barycentric weights, then <strong>renormalize</strong> the result:</p>
+      <div class="formula">N = normalize(λ₀·N₀ + λ₁·N₁ + λ₂·N₂)</div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══ Q7 Hidden Surface ═══ -->
+<div class="section" id="q7">
+  <div class="section-head">
+    <span class="qnum">Q7</span>
+    <h2>Hidden Surface Removal</h2>
+  </div>
+  <div class="section-body">
+
+    <div class="sub-q">
+      <div class="sub-q-label">Color at a point on the triangle</div>
+      <p>Standard barycentric interpolation — same as Q3 Part 3.</p>
+    </div>
+
+    <div class="sub-q">
+      <div class="sub-q-label">Backface culling — quad without being culled</div>
+      <div class="step-block">
+        <h3>Key Idea</h3>
+        <p>A triangle is front-facing if its vertices are ordered <strong>counter-clockwise (CCW)</strong> in screen space (or NDC). For a quad (4 vertices), split into 2 triangles and verify each is CCW. If the winding order of your 4-vertex sequence produces CCW triangles, they won't be culled.</p>
+        <pre>
+<span class="comment">// CCW test: for triangle (A, B, C)</span>
+signed_area = (B-A) × (C-A)   <span class="comment">// 2D cross product</span>
+if signed_area > 0 → CCW → front-facing → NOT culled</pre>
+      </div>
+    </div>
+
+    <div class="sub-q">
+      <div class="sub-q-label">Viewport transform</div>
+      <pre>
+<span class="comment">// NDC → viewport (screen space)</span>
+x_vp = (x_ndc + 1) / 2 · width
+y_vp = (y_ndc + 1) / 2 · height   <span class="comment">// or flip Y depending on convention</span></pre>
+    </div>
+
+  </div>
+</div>
+
+<!-- ═══ Q8 DDA ═══ -->
+<div class="section" id="q8">
+  <div class="section-head">
+    <span class="qnum">Q8</span>
+    <h2>DDA Line — (1,2) → (6,6)</h2>
+  </div>
+  <div class="section-body">
+    <div class="step-block">
+      <h3>Setup</h3>
+      <pre>
+dx = 6 - 1 = 5
+dy = 6 - 2 = 4
+steps = max(|dx|, |dy|) = <span class="val">5</span>
+
+x_inc = dx / steps = 5/5 = <span class="hi">1.0</span>
+y_inc = dy / steps = 4/5 = <span class="hi">0.8</span></pre>
+    </div>
+    <div class="step-block">
+      <h3>Iteration (round to nearest pixel)</h3>
+      <table class="algo">
+        <tr><th>Step</th><th>x (exact)</th><th>y (exact)</th><th>Pixel (round)</th></tr>
+        <tr><td>0</td><td>1.0</td><td>2.0</td><td class="green">(1, 2)</td></tr>
+        <tr><td>1</td><td>2.0</td><td>2.8</td><td class="green">(2, 3)</td></tr>
+        <tr><td>2</td><td>3.0</td><td>3.6</td><td class="green">(3, 4)</td></tr>
+        <tr><td>3</td><td>4.0</td><td>4.4</td><td class="green">(4, 4)</td></tr>
+        <tr><td>4</td><td>5.0</td><td>5.2</td><td class="green">(5, 5)</td></tr>
+        <tr><td>5</td><td>6.0</td><td>6.0</td><td class="green">(6, 6)</td></tr>
+      </table>
+    </div>
+    <div class="good">DDA uses floating point increments and rounds. Midpoint/Bresenham avoids floats entirely (integer only). Both produce the same pixels for this line.</div>
+  </div>
+</div>
+
+<!-- ═══ Q9 View Matrix ═══ -->
+<div class="section" id="q9">
+  <div class="section-head">
+    <span class="qnum">Q9</span>
+    <h2>Transformations + View Matrix</h2>
+  </div>
+  <div class="section-body">
+
+    <div class="sub-q">
+      <div class="sub-q-label">Part 1 — 90° rotation around Y, then Scale(1,2,1)</div>
+      <div class="step-block">
+        <h3>Rotation around Y by 90°</h3>
+        <pre>
+Ry(90°):
+ cos90  0  sin90   →    0  0  1
+    0   1     0    →    0  1  0
+-sin90  0  cos90   →   -1  0  0
+
+Then Scale(1,2,1) scales the Y column by 2.
+
+M = S · R:
+ 0  0  1  0
+ 0  2  0  0
+-1  0  0  0
+ 0  0  0  1</pre>
+        <p style="margin-top:10px;font-size:13px;">For normals, compute <span class="formula">(M⁻¹)ᵀ</span> and apply to normal vectors, then normalize.</p>
+        <p style="margin-top:6px;font-size:13px;color:var(--muted)">Color and UV coords are unchanged by the model matrix.</p>
+      </div>
+    </div>
+
+    <div class="sub-q">
+      <div class="sub-q-label">Part 2 — View Matrix from eye, lookAt, up</div>
+      <div class="step-block">
+        <h3>Look-At Construction</h3>
+        <pre>
+f = normalize(lookAt - eye)        <span class="comment">// forward</span>
+r = normalize(f × up)              <span class="comment">// right</span>
+u = r × f                          <span class="comment">// true up (reorthogonalized)</span>
+
+View =
+| r.x   r.y   r.z  -dot(r, eye) |
+| u.x   u.y   u.z  -dot(u, eye) |
+|-f.x  -f.y  -f.z   dot(f, eye) |
+|  0     0     0        1        |</pre>
+        <div class="warn">The last column is the translation that moves world origin to camera. Notice -f (we look down -Z in OpenGL convention).</div>
+      </div>
+    </div>
+
+    <div class="sub-q">
+      <div class="sub-q-label">Part 3 — NDC and HCS given P</div>
+      <pre>
+HCS = P · V_camera
+NDC = HCS.xyz / HCS.w</pre>
+    </div>
+
+    <div class="sub-q">
+      <div class="sub-q-label">Part 4 — Is projection orthographic?</div>
+      <div class="good">If P has no off-diagonal terms that mix x/y/z with w (i.e. the last row is [0,0,0,1]), it's orthographic — no perspective divide happens. If P sets w to something other than the original w, it's perspective.</div>
+    </div>
+
+    <div class="sub-q">
+      <div class="sub-q-label">Part 5 — NDC → Viewport</div>
+      <pre>
+x_vp = (x_ndc + 1) / 2 · W
+y_vp = (y_ndc + 1) / 2 · H</pre>
+    </div>
+
+  </div>
+</div>
+
+<!-- ═══ Q10 Clipping ═══ -->
+<div class="section" id="q10">
+  <div class="section-head">
+    <span class="qnum">Q10</span>
+    <h2>Sutherland-Hodgman Clipping</h2>
+  </div>
+  <div class="section-body">
+
+    <div class="step-block">
+      <h3>Given Vertices &amp; Colors</h3>
+      <table class="algo">
+        <tr><th>Vertex</th><th>Position</th><th>Color</th></tr>
+        <tr><td>V0</td><td>(-2, 0, 0)</td><td>(1, 0, 0)</td></tr>
+        <tr><td>V1</td><td>(0, 0, 0)</td><td>(0, 1, 0)</td></tr>
+        <tr><td>V2</td><td>(0, 2, 2)</td><td>(0, 0, 1)</td></tr>
+      </table>
+    </div>
+
+    <div class="step-block">
+      <h3>Which planes clip?</h3>
+      <pre>
+NDC clip planes: x∈[-1,1], y∈[-1,1], z∈[-1,1]
+
+V0 = (-2,0,0): x=-2 < -1  → <span class="red">OUTSIDE left</span>
+V1 = (0,0,0):  all in [-1,1] → <span class="val">INSIDE</span>
+V2 = (0,2,2):  y=2 > 1, z=2 > 1 → <span class="red">OUTSIDE top, back</span></pre>
+    </div>
+
+    <div class="step-block">
+      <h3>Apply Sutherland-Hodgman — Left Plane (x = -1) first</h3>
+      <pre>
+Edge V0→V1: V0 outside, V1 inside
+  → compute intersection with x=-1:
+  t = (-1 - (-2)) / (0 - (-2)) = 1/2 = 0.5
+  P_int = V0 + 0.5·(V1-V0) = (-2+1, 0, 0) = <span class="hi">(-1, 0, 0)</span>
+  C_int = (1,0,0) + 0.5·((0,1,0)-(1,0,0)) = <span class="hi">(0.5, 0.5, 0)</span>
+  Output: P_int, V1
+
+Edge V1→V2: both checked — V1 inside, V2 inside (for left plane x=-1: V2.x=0 ≥ -1)
+  Output: V2
+
+After left clip:  [(-1,0,0,C=(0.5,0.5,0)), (0,0,0,C=(0,1,0)), (0,2,2,C=(0,0,1))]</pre>
+    </div>
+
+    <div class="step-block">
+      <h3>Right Plane (x = 1)</h3>
+      <pre>
+All x values: -1, 0, 0 — all ≤ 1 → <span class="val">no clipping needed</span></pre>
+    </div>
+
+    <div class="step-block">
+      <h3>Top Plane (y = 1)</h3>
+      <pre>
+(-1,0,0): y=0 ≤ 1 → inside
+(0,0,0):  y=0 ≤ 1 → inside
+(0,2,2):  y=2 > 1 → <span class="red">outside</span>
+
+Edge (0,0,0)→(0,2,2): inside→outside
+  t = (1-0)/(2-0) = 0.5
+  P_int = (0,1,1)
+  C_int = (0,1,0) + 0.5·((0,0,1)-(0,1,0)) = (0, 0.5, 0.5)
+
+Edge (0,2,2)→(-1,0,0): outside→inside
+  t = (1-2)/(0-2) = 0.5
+  P_int = (0+0.5·(-1-0), 2+0.5·(0-2), 2+0.5·(0-2)) = (-0.5, 1, 1)
+  C_int = (0,0,1) + 0.5·((0.5,0.5,0)-(0,0,1)) = (0.25, 0.25, 0.5)
+
+After top clip: [(-1,0,0), (0,0,0), (0,1,1), (-0.5,1,1)]</pre>
+    </div>
+
+    <div class="step-block">
+      <h3>Back Plane (z = 1)</h3>
+      <pre>
+(-1,0,0): z=0 ≤ 1 → inside
+(0,0,0):  z=0 ≤ 1 → inside
+(0,1,1):  z=1 ≤ 1 → inside (on boundary = inside)
+(-0.5,1,1): z=1  → inside
+
+→ <span class="val">no further clipping</span></pre>
+      <div class="good">Final clipped polygon (4 vertices) after left + top clip. Bottom, right, front planes don't clip this particular triangle.</div>
+    </div>
+
+  </div>
+</div>
+
+<!-- ═══ Q11 Texture ═══ -->
+<div class="section" id="q11">
+  <div class="section-head">
+    <span class="qnum">Q11</span>
+    <h2>Texture Mapping — 4×4 Texture</h2>
+  </div>
+  <div class="section-body">
+
+    <div class="sub-q">
+      <div class="sub-q-label">Part 1 — Number of Mip levels</div>
+      <pre>
+levels = floor(log2(max(width, height))) + 1
+       = floor(log2(4)) + 1
+       = 2 + 1 = <span class="hi">3</span>   <span class="comment">// levels: 4×4, 2×2, 1×1</span></pre>
+    </div>
+
+    <div class="sub-q">
+      <div class="sub-q-label">Part 2 — Choose mip level for triangle</div>
+      <div class="step-block">
+        <h3>Method</h3>
+        <pre>
+<span class="comment">// compute UV footprint: how many texels does one pixel cover?</span>
+d = max(||dUV/dx||, ||dUV/dy||)    <span class="comment">// screen-space UV derivatives</span>
+level = log2(d · texture_size)
+
+<span class="comment">// pick level that gives ~1 texel per pixel</span>
+<span class="comment">// for a coarse triangle covering a large screen area → higher level (smaller mip)</span></pre>
+        <p style="font-size:13px;color:var(--muted);margin-top:8px;">The exact answer depends on the given triangle's screen-space size vs texture size.</p>
+      </div>
+    </div>
+
+    <div class="sub-q">
+      <div class="sub-q-label">Part 3 — Bilinear at Level 0, Repeat mode</div>
+      <div class="step-block">
+        <h3>Steps</h3>
+        <pre>
+1. Take UV coords (u, v)
+2. Apply REPEAT: u = frac(u), v = frac(v)   <span class="comment">// wrap using modulo</span>
+3. Map to texel space: u' = u·(W-1), v' = v·(H-1)
+4. Get 4 surrounding texels (floor/ceil on both axes)
+5. Bilinear interpolate:
+   top    = lerp(T[x0,y1], T[x1,y1], frac(u'))
+   bottom = lerp(T[x0,y0], T[x1,y0], frac(u'))
+   result = lerp(bottom, top, frac(v'))</pre>
+      </div>
+    </div>
+
+    <div class="sub-q">
+      <div class="sub-q-label">Part 4 — Trilinear at Level 0, Clamp mode</div>
+      <div class="warn">The exam answer was <strong>none</strong> (no valid color). The reason: level 0 has 4×4 texels, level 1 has 2×2. Trilinear blends between two adjacent mip levels. At exactly level 0, there's no level -1 to blend with — so trilinear at the very bottom level is undefined/degenerate. The exam expected you to recognize this edge case.</div>
+    </div>
+
+  </div>
+</div>
+
+<!-- ═══ Q12 Ray Tracing ═══ -->
+<div class="section" id="q12">
+  <div class="section-head">
+    <span class="qnum">Q12</span>
+    <h2>Light &amp; Ray Tracing — Blinn-Phong / Microfacet</h2>
+  </div>
+  <div class="section-body">
+
+    <div class="sub-q">
+      <div class="sub-q-label">Part 1 — Half vector h</div>
+      <div class="step-block">
+        <pre>
+<span class="comment">// l = direction from surface point to light</span>
+<span class="comment">// v = direction from surface point to eye</span>
+h = normalize(l + v)</pre>
+        <p style="font-size:13px;margin-top:8px;">The microfacet normal that caused the reflection is exactly <strong>h</strong> — the half-vector between incoming and outgoing directions.</p>
+      </div>
+    </div>
+
+    <div class="sub-q">
+      <div class="sub-q-label">Part 2 — Perfectly smooth surface — any light reaching eye?</div>
+      <div class="step-block">
+        <pre>
+Perfectly smooth → Dirac delta NDF (only one normal direction).
+The reflected ray from a point light is a single direction.
+<span class="comment">// light reaches the eye only if the reflected direction exactly equals v</span>
+→ Yes, but only if reflect(-l, n) == v exactly.
+→ In practice: extremely unlikely unless specifically constructed.</pre>
+        <div class="warn">Answer: <strong>Yes — but only in one exact direction.</strong> A smooth surface acts like a perfect mirror — only the one specular ray reaches the eye.</div>
+      </div>
+    </div>
+
+    <div class="sub-q">
+      <div class="sub-q-label">Part 3 — Which α makes NDF uniform over northern hemisphere?</div>
+      <pre>
+GGX NDF: D(m) ∝ α² / (cos²θ · (α²-1) + 1)²
+
+For D to be constant (uniform), we need the θ-dependence to vanish.
+When α=1: denominator = (cos²θ·0 + 1)² = 1 → D = constant ✓
+
+Answer: <span class="hi">α = 1</span></pre>
+    </div>
+
+    <div class="sub-q">
+      <div class="sub-q-label">Part 4 — Blinn-Phong L₀</div>
+      <div class="step-block">
+        <pre>
+h = normalize(l + v)
+L0 = Id · kd · max(0, n·l)  +  Is · ks · max(0, n·h)^shininess
+
+<span class="comment">// Id = diffuse light intensity, Is = specular</span>
+<span class="comment">// kd, ks = material diffuse/specular coefficients</span></pre>
+      </div>
+    </div>
+
+    <div class="sub-q">
+      <div class="sub-q-label">Part 5 — Shadow ray intersections (Triangle, Sphere, Sphere)</div>
+      <div class="step-block">
+        <pre>
+Shadow ray: origin = surface point P, direction = normalize(P_light - P)
+
+Test each shape:
+- Check if intersection t > 0 (in front of P) and t < dist(P, light)
+- If yes → that shape blocks the light
+
+List ALL shapes where this is true.</pre>
+        <p style="font-size:13px;color:var(--muted);margin-top:8px;">Without the specific geometry values from the exam, you test each shape analytically. The answer depends on the given vertex/sphere data.</p>
+      </div>
+    </div>
+
+    <div class="sub-q">
+      <div class="sub-q-label">Part 6 — Is point P in shadow?</div>
+      <pre>
+P is in shadow if any shape intersects the shadow ray (t ∈ (0, dist_to_light)).
+If Part 5 found at least one blocker → <span class="hi">yes, P is shadowed</span>.</pre>
+    </div>
+
+  </div>
+</div>
+
+<!-- ═══ Q13 Full Barycentric ═══ -->
+<div class="section" id="q13">
+  <div class="section-head">
+    <span class="qnum">Q13</span>
+    <h2>Full Barycentric Pipeline — Triangle (0.5,0.5), (4.5,0.5), (2.5,4.5)</h2>
+  </div>
+  <div class="section-body">
+
+    <div class="sub-q">
+      <div class="sub-q-label">Part 1 — Rasterize using offscreen point (-1,-1)</div>
+      <div class="step-block">
+        <h3>Edge function setup</h3>
+        <pre>
+P0=(0.5,0.5), P1=(4.5,0.5), P2=(2.5,4.5)
+offscreen = (-1, -1)  <span class="comment">// to determine inside sign</span>
+
+For each pixel (x+0.5, y+0.5) in bounding box:
+  compute f0, f1, f2
+  if same sign as f_i(offscreen) for all i → pixel is inside → draw it</pre>
+        <div class="warn">The offscreen point is used to determine which sign means "inside". If f_i(offscreen) &gt; 0 for all i, then pixels where all f_i &gt; 0 are inside.</div>
+      </div>
+    </div>
+
+    <div class="sub-q">
+      <div class="sub-q-label">Part 2 — Barycentric of (2.5, 2.5) without perspective correction</div>
+      <div class="step-block">
+        <pre>
+<span class="comment">// Using the triangle area method</span>
+Total area  = 0.5 · |( P1-P0) × (P2-P0)|
+            = 0.5 · |(4,0) × (2,4)| = 0.5 · 16 = 8
+
+Sub-area for λ0 (opposite P0): triangle(P, P1, P2)
+  = 0.5·|(P1-P)×(P2-P)| = 0.5·|(2,−2)×(0,2)| = 0.5·4 = 2
+  λ0 = 2/8 = 0.25
+
+Sub-area for λ1 (opposite P1): triangle(P0, P, P2)
+  = 0.5·|(P−P0)×(P2−P0)| = 0.5·|(2,2)×(2,4)| = 0.5·|(8-4)| = 2
+  λ1 = 2/8 = 0.25  <span class="comment">(verify: sum should be 1)</span>
+
+λ2 = 1 - 0.25 - 0.25 = <span class="hi">0.5</span>
+
+Result: λ = <span class="hi">(0.25, 0.25, 0.5)</span></pre>
+      </div>
+    </div>
+
+    <div class="sub-q">
+      <div class="sub-q-label">Part 3 — With perspective correction (depth ~0.5 given)</div>
+      <div class="step-block">
+        <pre>
+<span class="comment">// need w values for each vertex from HCS</span>
+corrected_λ_i = (λ_i / w_i) / Σ(λ_j / w_j)
+
+<span class="comment">// interpolated depth: z = λ0·z0 + λ1·z1 + λ2·z2 (use corrected λ)</span></pre>
+      </div>
+    </div>
+
+    <div class="sub-q">
+      <div class="sub-q-label">Part 4 — Depth test: does (2.5,4.5) with some depth overdraw our point?</div>
+      <div class="step-block">
+        <pre>
+depth buffer keeps the fragment with <span class="hi">smallest</span> z (closest to camera).
+if new_depth < stored_depth → overwrite (draw new fragment)
+if new_depth >= stored_depth → discard</pre>
+        <div class="good">The point with smaller depth wins. The exam said depth ~0.5 — compare against the stored depth at that pixel, smallest one gets drawn.</div>
+      </div>
+    </div>
+
+    <div class="sub-q">
+      <div class="sub-q-label">Part 5 — Alpha blending (α=0.25, γ=2.2)</div>
+      <div class="step-block">
+        <pre>
+<span class="comment">// alpha blend in linear space, not gamma-corrected space</span>
+
+1. Convert to linear:  C_linear = C_srgb ^ γ   (γ = 2.2)
+2. Blend:
+   C_out = α · Cs + (1−α) · Cd
+         = 0.25 · Cs_linear + 0.75 · Cd_linear
+3. Convert back to sRGB: C_final = C_out ^ (1/γ)</pre>
+        <div class="warn">The exam expected you to do the gamma correction step — blending in sRGB space gives wrong results. Always blend in linear space.</div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+</main>
+
+<button class="scrolltop" onclick="window.scrollTo({top:0,behavior:'smooth'})">↑ top</button>
+
+</body>
+</html>
